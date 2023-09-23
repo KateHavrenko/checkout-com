@@ -10,14 +10,23 @@ export default function Todos() {
 
   return (
     <div>
-      <h1>Feedback Results</h1>
-      <Link to="/">Go back</Link>
+      <div className='md:flex md:justify-between'>
+        <h1 className='text-xl mb-4 md:mb-12 font-bold'>Feedback Results</h1>
+
+        <Link to="/">
+          <button className='block bg-yellow-500 text-yellow-800 rounded shadow py-1 px-3 text-lg overflow-hidden md:mb-0 mb-4'>
+            Go back
+          </button>
+        </Link>
+
+      </div>
       <ul>
+        <p className='font-bold mb-6'>Latest comments</p>
         {feedbacks.map((feedback) => (
-          <li key={feedback.id}>
-            <p>{feedback.data.email}</p>
+          <li key={feedback.id} className='py-2'>
             <p>{feedback.data.firstName}</p>
-            <p>{feedback.data.comment}</p>
+            <p>{feedback.data.email}</p>
+            <p className='py-2'>{feedback.data.comment}</p>
             <hr></hr>
           </li>
         ))}

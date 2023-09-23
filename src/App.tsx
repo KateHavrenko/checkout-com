@@ -5,7 +5,7 @@ import Results from './pages/Results';
 
 const App = () => {
   return (
-    <div className="py-20 px-10 bg-purple-700 min-h-screen">
+    <div className="py-20 px-10 bg-purple-300 min-h-screen">
       <Routes>
         <Route path="/" element={<Form />} />
         <Route path="/results" element={<Results />} />
