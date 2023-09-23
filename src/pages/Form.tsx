@@ -1,6 +1,10 @@
-import { useForm, Controller } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
+import { addFeedback } from '../features/feedback/feedbackSlice';
+import { useDispatch } from 'react-redux';
+import {Link, Routes, Route, useNavigate} from 'react-router-dom';
+
 
 const schema = yup.object({
   firstName: yup.string().required(),
@@ -10,7 +14,8 @@ const schema = yup.object({
 }).required();
 
 export default function App() {
-  const { register, handleSubmit, formState: { errors } } = useForm({
+  const dispatch = useDispatch();
+  const { register, handleSubmit, formState: { errors }, reset } = useForm({
     resolver: yupResolver(schema)
   });
 
@@ -21,8 +26,13 @@ export default function App() {
     comment: string
   };
 
+  const navigate = useNavigate();
+
   const onSubmit = (data: FormData) => {
     console.log(data);
+    dispatch(addFeedback(data));
+    reset()
+    navigate('/results');
   };
 
   return (
@@ -101,7 +111,7 @@ export default function App() {
                 ? "text-red-300 border-red-400"
                 : "text-purple-200 border-purple-400"
                 }`}
-                type="number"
+                type="text"
                 name="comment"
                 id="comment"
               />
