@@ -18,9 +18,10 @@ export default function Todos() {
             <p>{feedback.data.email}</p>
             <p>{feedback.data.firstName}</p>
             <p>{feedback.data.comment}</p>
+            <hr></hr>
           </li>
-
         ))}
+
       </ul>
     </div>
   );
