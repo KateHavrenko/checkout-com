@@ -3,7 +3,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
 import { addFeedback } from '../features/feedback/feedbackSlice';
 import { useDispatch } from 'react-redux';
-import {Link, Routes, Route, useNavigate} from 'react-router-dom';
+import { useNavigate} from 'react-router-dom';
 
 
 const schema = yup.object({
@@ -29,8 +29,12 @@ export default function App() {
   const navigate = useNavigate();
 
   const onSubmit = (data: FormData) => {
-    console.log(data);
-    dispatch(addFeedback(data));
+    const dataWithTimestamp = {
+      ...data,
+      timestamp: new Date().toDateString(),
+    };
+
+    dispatch(addFeedback(dataWithTimestamp));
     reset()
     navigate('/results');
   };

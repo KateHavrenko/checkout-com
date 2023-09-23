@@ -2,12 +2,19 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from '../app/store'; // Import your RootState type
 import { Link } from 'react-router-dom';
+import LineChart from '../components/LineChart';
 
 export default function Todos() {
   const feedbacks = useSelector((state: RootState) => state.feedback);
+  feedbacks.length > 10 && feedbacks.slice(0, 10);
 
-  console.log(feedbacks)
-
+  const chartData = {
+    labels: feedbacks?.map((feedback) => feedback.data.timestamp),
+    datasets: [{
+      label: 'Rating',
+      data: feedbacks?.map((feedback) => +feedback.data.rating)
+    }]
+  }
   return (
     <div>
       <div className='md:flex md:justify-between'>
@@ -17,12 +24,13 @@ export default function Todos() {
           <button className='block bg-yellow-500 text-yellow-800 rounded shadow py-1 px-3 text-lg overflow-hidden md:mb-0 mb-4'>
             Go back
           </button>
-        </Link>
+        </Link> 
 
       </div>
+      <LineChart chartData={chartData}/>
       <ul>
-        <p className='font-bold mb-6'>Latest comments</p>
-        {feedbacks.map((feedback) => (
+        <p className='font-bold my-6'>Latest comments</p>
+        {feedbacks && feedbacks.map((feedback) => (
           <li key={feedback.id} className='py-2'>
             <p>{feedback.data.firstName}</p>
             <p>{feedback.data.email}</p>
@@ -30,7 +38,6 @@ export default function Todos() {
             <hr></hr>
           </li>
         ))}
-
       </ul>
     </div>
   );
