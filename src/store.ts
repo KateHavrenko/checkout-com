@@ -5,7 +5,7 @@ import { combineReducers } from 'redux';
 import { persistReducer } from 'redux-persist';
 import thunk from 'redux-thunk';
 
-import feedbackReducer from '../features/feedback/feedbackSlice';
+import feedbackReducer from './features/feedback/feedbackSlice';
 
 const reducers = combineReducers({
   feedback: feedbackReducer,
