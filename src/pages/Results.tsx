@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { RootState } from '../app/store'; // Import your RootState type
+import { RootState } from '../app/store';
 import { Link } from 'react-router-dom';
 import LineChart from '../components/LineChart';
 
@@ -9,7 +9,7 @@ export default function Todos() {
   feedbacks.length > 10 && feedbacks.slice(0, 10);
 
   const chartData = {
-    labels: feedbacks?.map((feedback) => feedback.data.timestamp),
+    labels: feedbacks?.map((feedback) => feedback.data.timestamp.split(' ').slice(1)),
     datasets: [{
       label: 'Rating',
       data: feedbacks?.map((feedback) => +feedback.data.rating)
@@ -27,7 +27,7 @@ export default function Todos() {
         </Link> 
 
       </div>
-      <LineChart chartData={chartData}/>
+      {feedbacks ? <LineChart chartData={chartData}/> : '<p>Add a feedback</p>'}
       <ul>
         <p className='font-bold my-6'>Latest comments</p>
         {feedbacks && feedbacks.map((feedback) => (

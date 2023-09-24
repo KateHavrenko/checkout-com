@@ -1,4 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
+import type { PreloadedState } from '@reduxjs/toolkit'
 import storage from 'redux-persist/lib/storage';
 import { combineReducers } from 'redux';
 import { persistReducer } from 'redux-persist';
@@ -23,5 +24,14 @@ const store = configureStore({
   middleware: [thunk],
 });
 
+export function setupStore(preloadedState?: PreloadedState<RootState>) {
+  return configureStore({
+    reducer: reducers,
+    preloadedState
+  })
+}
+
 export type RootState = ReturnType<typeof store.getState>
+export type AppStore = ReturnType<typeof setupStore>
+export type AppDispatch = AppStore['dispatch']
 export default store;

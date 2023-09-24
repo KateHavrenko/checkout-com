@@ -1,7 +1,6 @@
 import { Routes, Route } from 'react-router-dom';
-import Form from './pages/Form';
+import Form from './pages/FeedbackForm';
 import Results from './pages/Results';
-
 
 const App = () => {
   return (

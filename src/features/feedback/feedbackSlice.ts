@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { v4 as uuid } from 'uuid'; // Assuming you want to use the uuid library
+import { v4 as uuid } from 'uuid'; 
 
 const initialState: { id: string; data: any }[] = [];
 
