@@ -7,10 +7,10 @@ import { useNavigate} from 'react-router-dom';
 
 
 const schema = yup.object({
-  firstName: yup.string().required(),
-  email: yup.string().email().required(),
-  rating: yup.number().required().min(1).max(5),
-  comment: yup.string().required(),
+  firstName: yup.string().required('Name is a required field'),
+  email: yup.string().email('it should be a valid email').required('Email is a required fiels'),
+  rating: yup.number().typeError('Rating must be a number').required('Rating is a required field').min(1, 'The minimum value should be 1').max(5, 'The maximum value should be 5'),
+  comment: yup.string().required('Comment is a required field'),
 }).required();
 
 export default function FeedbackForm() {
