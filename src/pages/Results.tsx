@@ -4,8 +4,9 @@ import { RootState } from '../store';
 import { Link } from 'react-router-dom';
 import LineChart from '../components/LineChart';
 
-export default function Todos() {
+export default function Results() {
   const feedbacks = useSelector((state: RootState) => state.feedback);
+
   const newestFeedback = feedbacks.length > 10 ? feedbacks.slice(feedbacks.length - 10) : feedbacks;
 
   const chartData = {
@@ -30,7 +31,7 @@ export default function Todos() {
       {feedbacks ? <LineChart chartData={chartData}/> : '<p>Add a feedback</p>'}
       <ul>
         <p className='font-bold my-6'>Latest comments</p>
-        {newestFeedback && newestFeedback.map((feedback) => (
+        {newestFeedback && newestFeedback.slice().reverse().map((feedback) => (
           <li key={feedback.id} className='py-2'>
             <p>{feedback.data.firstName}</p>
             <p>{feedback.data.email}</p>
